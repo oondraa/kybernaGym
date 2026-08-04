@@ -18,6 +18,7 @@
     clock: document.getElementById("clock"),
     sourceNote: document.getElementById("source-note"),
     generatedAt: document.getElementById("generated-at"),
+    holidayOverlay: document.getElementById("holiday-overlay"),
   };
 
   let schedule = null;
@@ -36,6 +37,20 @@
       weekday: parts.weekday,
       hm: `${parts.hour}:${parts.minute}`,
     };
+  }
+
+  // Letní prázdniny (červenec + srpen do 30.) - škola nemá výuku, SIS je mimo
+  // provoz a rozvrh v datech je jen poslední dostupná (neplatná) edice.
+  function isSummerHoliday(date = new Date()) {
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: TZ,
+      month: "numeric",
+      day: "numeric",
+    });
+    const parts = Object.fromEntries(fmt.formatToParts(date).map((p) => [p.type, p.value]));
+    const month = Number(parts.month);
+    const day = Number(parts.day);
+    return month === 7 || (month === 8 && day <= 30);
   }
 
   function timeToMinutes(hm) {
@@ -216,6 +231,7 @@
 
   async function init() {
     els.slotDetailClose.addEventListener("click", hideSlotDetail);
+    els.holidayOverlay.hidden = !isSummerHoliday();
 
     try {
       const res = await fetch("data/schedule.json", { cache: "no-store" });
@@ -242,6 +258,7 @@
       updateClock();
       renderStatus();
       renderTimeline();
+      els.holidayOverlay.hidden = !isSummerHoliday();
     }, 30000);
   }
 

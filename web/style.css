@@ -346,3 +346,43 @@ body {
 @media (min-width: 640px) {
   .status-badge { font-size: 2.3rem; }
 }
+
+/* ---------- Holiday overlay ---------- */
+.holiday-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.holiday-card {
+  max-width: 380px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+}
+
+.holiday-icon {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.holiday-card h2 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+}
+
+.holiday-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
