@@ -1,0 +1,478 @@
+{
+  "generated_at": "2026-08-03T15:55:35.829648+02:00",
+  "source_note": "Data vytěžena OCR z posledního dostupného rozvrhu (SIS školy je mimo provoz o prázdninách). Reálná obsazenost se může od nástupu do nového školního roku lišit.",
+  "times": [
+    "07:00-07:45",
+    "07:50-08:35",
+    "08:45-09:30",
+    "09:45-10:30",
+    "10:45-11:30",
+    "11:45-12:30",
+    "12:45-13:30",
+    "13:45-14:30",
+    "14:45-15:30",
+    "15:45-16:30",
+    "16:45-17:30",
+    "17:45-18:30"
+  ],
+  "room": "P0 (posilovna)",
+  "day_order": [
+    "PO",
+    "UT",
+    "ST",
+    "CT",
+    "PA"
+  ],
+  "days": {
+    "PO": {
+      "name": "Pondělí",
+      "date_label": "20.4.2026",
+      "slots": [
+        {
+          "period": 0,
+          "time": "07:00-07:45",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 1,
+          "time": "07:50-08:35",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T3",
+              "subject": "TEVt",
+              "teacher": "BE"
+            }
+          ]
+        },
+        {
+          "period": 2,
+          "time": "08:45-09:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T3",
+              "subject": "TEVt",
+              "teacher": "BE"
+            }
+          ]
+        },
+        {
+          "period": 3,
+          "time": "09:45-10:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I4",
+              "subject": "TEV",
+              "teacher": "BE"
+            }
+          ]
+        },
+        {
+          "period": 4,
+          "time": "10:45-11:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I4",
+              "subject": "TEVt",
+              "teacher": "BE"
+            }
+          ]
+        },
+        {
+          "period": 5,
+          "time": "11:45-12:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 6,
+          "time": "12:45-13:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 7,
+          "time": "13:45-14:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 11,
+          "time": "17:45-18:30",
+          "occupied": false,
+          "entries": []
+        }
+      ]
+    },
+    "UT": {
+      "name": "Úterý",
+      "date_label": "21.4.2026",
+      "slots": [
+        {
+          "period": 0,
+          "time": "07:00-07:45",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 1,
+          "time": "07:50-08:35",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 2,
+          "time": "08:45-09:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 3,
+          "time": "09:45-10:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 4,
+          "time": "10:45-11:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 5,
+          "time": "11:45-12:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 6,
+          "time": "12:45-13:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 7,
+          "time": "13:45-14:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 11,
+          "time": "17:45-18:30",
+          "occupied": false,
+          "entries": []
+        }
+      ]
+    },
+    "ST": {
+      "name": "Středa",
+      "date_label": "22.4.2026",
+      "slots": [
+        {
+          "period": 0,
+          "time": "07:00-07:45",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 1,
+          "time": "07:50-08:35",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 2,
+          "time": "08:45-09:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 3,
+          "time": "09:45-10:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 4,
+          "time": "10:45-11:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 5,
+          "time": "11:45-12:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 6,
+          "time": "12:45-13:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I2",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 7,
+          "time": "13:45-14:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I2",
+              "subject": "TEV",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T1",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T1",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 11,
+          "time": "17:45-18:30",
+          "occupied": false,
+          "entries": []
+        }
+      ]
+    },
+    "CT": {
+      "name": "Čtvrtek",
+      "date_label": "23.4.2026",
+      "slots": [
+        {
+          "period": 0,
+          "time": "07:00-07:45",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 1,
+          "time": "07:50-08:35",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 2,
+          "time": "08:45-09:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G1",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 3,
+          "time": "09:45-10:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 4,
+          "time": "10:45-11:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 5,
+          "time": "11:45-12:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 6,
+          "time": "12:45-13:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G3",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 7,
+          "time": "13:45-14:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 11,
+          "time": "17:45-18:30",
+          "occupied": false,
+          "entries": []
+        }
+      ]
+    },
+    "PA": {
+      "name": "Pátek",
+      "date_label": "24.4.2026",
+      "slots": [
+        {
+          "period": 0,
+          "time": "07:00-07:45",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 1,
+          "time": "07:50-08:35",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 2,
+          "time": "08:45-09:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 3,
+          "time": "09:45-10:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 4,
+          "time": "10:45-11:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 5,
+          "time": "11:45-12:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 6,
+          "time": "12:45-13:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 7,
+          "time": "13:45-14:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 11,
+          "time": "17:45-18:30",
+          "occupied": false,
+          "entries": []
+        }
+      ]
+    }
+  }
+}

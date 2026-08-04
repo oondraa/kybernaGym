@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Posilovna – je volno?</title>
+<meta name="description" content="Přehled obsazenosti školní posilovny podle rozvrhu.">
+<meta name="theme-color" content="#0f172a">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏋️</text></svg>">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🏋️</span>
+      <span class="brand-name">Posilovna</span>
+    </div>
+    <div id="clock" class="clock">--:--</div>
+  </header>
+
+  <main>
+    <section id="status-card" class="status-card status-loading">
+      <div class="status-badge" id="status-badge">Načítám…</div>
+      <div class="status-detail" id="status-detail">Zjišťuji aktuální stav rozvrhu.</div>
+      <div class="status-sub" id="status-sub"></div>
+    </section>
+
+    <nav class="day-tabs" id="day-tabs" aria-label="Výběr dne"></nav>
+
+    <section class="timeline-card">
+      <div class="timeline-header">
+        <h2 id="timeline-day-title">Rozvrh dne</h2>
+        <span class="timeline-hint">klepni na hodinu pro detail</span>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section id="slot-detail" class="slot-detail" hidden>
+      <button class="slot-detail-close" id="slot-detail-close" aria-label="Zavřít">×</button>
+      <div id="slot-detail-content"></div>
+    </section>
+
+    <section class="legend">
+      <span class="legend-item"><i class="dot dot-free"></i> volno</span>
+      <span class="legend-item"><i class="dot dot-busy"></i> obsazeno</span>
+      <span class="legend-item"><i class="dot dot-now"></i> teď</span>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p id="source-note"></p>
+    <p id="generated-at" class="muted"></p>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
