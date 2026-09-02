@@ -6,3 +6,6 @@ venv/
 .agents/
 .claude/
 skills-lock.json
+
+# stahuje se čerstvě při každém běhu OCR pipeline, netřeba verzovat
+stazene_rozvrhy/

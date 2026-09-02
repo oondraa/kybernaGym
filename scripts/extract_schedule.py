@@ -18,9 +18,14 @@ import json
 import os
 import sys
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
+import requests
 from PIL import Image
 import pytesseract
+
+SIS_BASE_URL = "https://sis.ssakhk.cz/TimeTable/"
+TZ = ZoneInfo("Europe/Prague")
 
 # --- Kalibrace mřížky (ověřeno na skutečných obrázcích) ---
 START_X, START_Y = 41, 101
@@ -40,18 +45,48 @@ CASY = [
 # Kódy místnosti, které OCR může vyrobit z "P0" (nula se občas přečte jako písmeno O)
 POSILOVNA_ROOM_CODES = {"P0", "PO"}
 
-# den v obrázku -> (zkratka dne, pořadí, popisek data - podle poslední známé edice rozvrhu)
+# den v obrázku -> (zkratka dne, pořadí, název dne, posun oproti pondělí týdne)
 DAYS = [
-    ("PO1", "PO", "Pondělí", "20.4.2026"),
-    ("UT1", "UT", "Úterý", "21.4.2026"),
-    ("ST1", "ST", "Středa", "22.4.2026"),
-    ("CT1", "CT", "Čtvrtek", "23.4.2026"),
-    ("PA1", "PA", "Pátek", "24.4.2026"),
+    ("PO1", "PO", "Pondělí", 0),
+    ("UT1", "UT", "Úterý", 1),
+    ("ST1", "ST", "Středa", 2),
+    ("CT1", "CT", "Čtvrtek", 3),
+    ("PA1", "PA", "Pátek", 4),
 ]
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.join(BASE_DIR, "stazene_rozvrhy")
 OUT_PATH = os.path.join(BASE_DIR, "web", "data", "schedule.json")
+
+
+def current_week_monday():
+    """Vrátí datum pondělí aktuálního týdne (Europe/Prague) - rozvrh na
+    SIS je vždy pro aktuálně probíhající školní týden."""
+    today = datetime.now(TZ)
+    return today - timedelta(days=today.weekday())
+
+
+def download_schedules():
+    """Stáhne čerstvé obrázky rozvrhu ze SIS (přepíše ty ve stazene_rozvrhy/).
+
+    Na začátku školního roku SIS zveřejňuje rozvrh jen den (nebo pár dní)
+    dopředu - obrázek pro den, který ještě není hotový, buď chybí (404),
+    nebo je to prázdná mřížka. Obojí je v pořádku, extract_day() takový
+    den prostě vyhodnotí jako "posilovna volná".
+    """
+    os.makedirs(IMG_DIR, exist_ok=True)
+    headers = {"User-Agent": "Mozilla/5.0"}
+    for filename, code, cz_name, _ in DAYS:
+        url = f"{SIS_BASE_URL}{filename}.jpg"
+        try:
+            r = requests.get(url, headers=headers, timeout=15)
+            r.raise_for_status()
+            with open(os.path.join(IMG_DIR, f"{filename}.jpg"), "wb") as f:
+                f.write(r.content)
+            print(f"[stazeno] {cz_name} ({filename}.jpg)")
+        except requests.RequestException as err:
+            print(f"[!] Nepodařilo se stáhnout {filename}.jpg: {err}", file=sys.stderr)
 
 
 def cell_box(row, col):
@@ -96,8 +131,11 @@ def build_schedule(tesseract_cmd=None):
 
     days_out = {}
     any_found = False
+    monday = current_week_monday()
 
-    for filename, code, cz_name, date_label in DAYS:
+    for filename, code, cz_name, day_offset in DAYS:
+        d = monday + timedelta(days=day_offset)
+        date_label = f"{d.day}.{d.month}.{d.year}"
         img_path = os.path.join(IMG_DIR, f"{filename}.jpg")
         if not os.path.exists(img_path):
             print(f"[!] Přeskakuji {filename}: obrázek nenalezen ({img_path})")
@@ -135,9 +173,8 @@ def build_schedule(tesseract_cmd=None):
     return {
         "generated_at": datetime.now(timezone(timedelta(hours=2))).isoformat(),
         "source_note": (
-            "Data vytěžena OCR z posledního dostupného rozvrhu (SIS školy je mimo "
-            "provoz o prázdninách). Reálná obsazenost se může od nástupu do nového "
-            "školního roku lišit."
+            "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno "
+            "několikrát denně."
         ),
         "times": CASY,
         "room": "P0 (posilovna)",
@@ -147,9 +184,22 @@ def build_schedule(tesseract_cmd=None):
 
 
 def main():
+    default_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tesseract", default=r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+    parser.add_argument(
+        "--tesseract",
+        default=default_tesseract if os.path.exists(default_tesseract) else None,
+        help="Cesta k tesseract.exe (na Linuxu/CI se hledá v PATH, netřeba zadávat).",
+    )
+    parser.add_argument(
+        "--no-download",
+        action="store_true",
+        help="Nestahovat čerstvé obrázky ze SIS, použít jen to, co už je ve stazene_rozvrhy/.",
+    )
     args = parser.parse_args()
+
+    if not args.no_download:
+        download_schedules()
 
     data = build_schedule(tesseract_cmd=args.tesseract)
 

@@ -1,0 +1,44 @@
+name: Aktualizace rozvrhu (OCR)
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 3:00 / 6:00 / 12:00 / 18:00 Europe/Prague (CEST, UTC+2 - v zimě běží
+    # o hodinu později reálného času kvůli přechodu na SEČ, cron neumí DST).
+    - cron: "0 1,4,10,16 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Nainstalovat Tesseract OCR
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+
+      - name: Nainstalovat Python závislosti
+        run: pip install -r requirements.txt
+
+      - name: Stáhnout rozvrh a vytěžit obsazenost posilovny
+        run: python scripts/extract_schedule.py
+
+      - name: Commitnout schedule.json, pokud se změnil
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add web/data/schedule.json
+          if git diff --cached --quiet; then
+            echo "Beze změny, nic k commitnutí."
+          else
+            git commit -m "Automatická aktualizace rozvrhu"
+            git push
+          fi

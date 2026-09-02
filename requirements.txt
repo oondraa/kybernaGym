@@ -1,3 +1,4 @@
 Pillow
 pytesseract
 requests
+tzdata; sys_platform == "win32"
