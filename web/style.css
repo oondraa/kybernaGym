@@ -3,9 +3,11 @@
   --bg-grad-a: #eef2ff;
   --bg-grad-b: #f3f5f9;
   --card-bg: #ffffff;
+  --card-bg-glass: rgba(255, 255, 255, 0.72);
   --text: #12172b;
   --text-muted: #6b7280;
   --border: #e5e7eb;
+  --border-glass: rgba(255, 255, 255, 0.5);
   --free: #16a34a;
   --free-bg: #dcfce7;
   --busy: #dc2626;
@@ -13,9 +15,21 @@
   --now: #2563eb;
   --accent: #4f46e5;
   --shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.15);
+  --shadow-lg: 0 24px 48px -16px rgba(15, 23, 42, 0.3);
   --radius-lg: 22px;
   --radius-md: 14px;
   --radius-sm: 10px;
+
+  /* ---------- Motion tokens ----------
+     Damping-1.0-equivalent curves: strong ease-out for anything entering
+     or responding to the user, a snappier "spring-ish" curve reserved for
+     spatially-anchored moves (the day-tab indicator, sheet-like surfaces). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 340ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,9 +38,11 @@
     --bg-grad-a: #121a2e;
     --bg-grad-b: #0b0f1a;
     --card-bg: #151c2e;
+    --card-bg-glass: rgba(21, 28, 46, 0.62);
     --text: #e7ebf5;
     --text-muted: #93a0b8;
     --border: #232c44;
+    --border-glass: rgba(255, 255, 255, 0.08);
     --free: #34d399;
     --free-bg: rgba(52, 211, 153, 0.12);
     --busy: #f87171;
@@ -34,6 +50,7 @@
     --now: #60a5fa;
     --accent: #818cf8;
     --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -46,7 +63,7 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: 100%/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: radial-gradient(circle at 20% 0%, var(--bg-grad-a), var(--bg-grad-b) 60%);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -75,6 +92,7 @@ body {
   gap: 8px;
   font-weight: 700;
   font-size: 1.15rem;
+  letter-spacing: -0.01em;
 }
 
 .brand-icon { font-size: 1.4rem; }
@@ -90,23 +108,29 @@ body {
   border-radius: 999px;
 }
 
-/* ---------- Status card ---------- */
+/* ---------- Status card ----------
+   The hero surface: it's short, low-density, and changes state often
+   enough (free/busy) to earn the glass treatment - dense text elsewhere
+   (the timeline) stays on a solid card so it never fights legibility. */
 .status-card {
+  position: relative;
   border-radius: var(--radius-lg);
   padding: 28px 24px;
   box-shadow: var(--shadow);
   text-align: center;
-  transition: background 0.4s ease;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--card-bg-glass);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--border-glass);
+  transition: background var(--dur-slow) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
 }
 
 .status-card.status-free {
-  background: linear-gradient(160deg, var(--free-bg), var(--card-bg) 70%);
+  background: linear-gradient(160deg, var(--free-bg), var(--card-bg-glass) 70%);
 }
 
 .status-card.status-busy {
-  background: linear-gradient(160deg, var(--busy-bg), var(--card-bg) 70%);
+  background: linear-gradient(160deg, var(--busy-bg), var(--card-bg-glass) 70%);
 }
 
 .status-badge {
@@ -114,6 +138,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 6px;
+  transition: color var(--dur-base) var(--ease-out);
 }
 
 .status-free .status-badge { color: var(--free); }
@@ -131,35 +156,63 @@ body {
   color: var(--text-muted);
 }
 
-/* ---------- Day tabs ---------- */
+/* ---------- Day tabs ----------
+   A segmented control: a single pill slides between tabs instead of each
+   button re-skinning on click - the same element carries identity across
+   the switch, so which day is selected never has to be re-read from scratch. */
 .day-tabs {
+  position: relative;
   display: flex;
-  gap: 6px;
+  gap: 4px;
   margin: 18px 0 14px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   overflow-x: auto;
   scrollbar-width: none;
 }
 .day-tabs::-webkit-scrollbar { display: none; }
 
+/* The only element that ever paints the accent pill - individual tabs stay
+   transparent at rest and in .active, so there's nothing to crossfade and
+   nothing that can flash a gap while the indicator is mid-slide. */
+.day-tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translateX(0);
+  transition: transform var(--dur-base) var(--ease-spring);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .day-tab {
+  position: relative;
+  z-index: 1;
   flex: 1 0 auto;
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
+  border: none;
+  background: transparent;
   color: var(--text-muted);
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
   white-space: nowrap;
 }
 
-.day-tab:hover { border-color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .day-tab:not(.active):hover { color: var(--text); }
+}
+
+.day-tab:active { transform: scale(0.96); }
 
 .day-tab.active {
-  background: var(--accent);
-  border-color: var(--accent);
   color: #fff;
 }
 
@@ -194,6 +247,7 @@ body {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .timeline-hint {
@@ -205,6 +259,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+/* Toggled briefly by app.js around a day switch so the swap reads as a
+   crossfade instead of a teleport. Never applied on the 30s status tick. */
+.timeline.is-switching {
+  opacity: 0;
 }
 
 .slot {
@@ -216,11 +277,15 @@ body {
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  transition: transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
   background: transparent;
 }
 
-.slot:hover { transform: translateX(2px); }
+@media (hover: hover) and (pointer: fine) {
+  .slot:hover { transform: translateX(2px); }
+}
+
+.slot:active { transform: scale(0.98); }
 
 .slot-time {
   font-size: 0.78rem;
@@ -266,7 +331,11 @@ body {
   margin-right: -4px;
 }
 
-/* ---------- Slot detail ---------- */
+/* ---------- Slot detail ----------
+   Anchored to the row above it (transform-origin: top), so it reads as
+   growing out of the hour you tapped rather than appearing from nowhere.
+   display + @starting-style gives it a real, reversible exit instead of
+   the old keyframe-only entrance that just snapped away on close. */
 .slot-detail {
   position: relative;
   margin-top: 14px;
@@ -276,12 +345,21 @@ body {
   padding: 16px 40px 16px 16px;
   box-shadow: var(--shadow);
   font-size: 0.9rem;
-  animation: fade-in 0.15s ease;
+  transform-origin: top center;
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), display var(--dur-base) allow-discrete;
 }
 
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+.slot-detail[hidden] {
+  display: none;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+}
+
+@starting-style {
+  .slot-detail:not([hidden]) {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
 }
 
 .slot-detail-close {
@@ -295,7 +373,15 @@ body {
   line-height: 1;
   cursor: pointer;
   padding: 4px 8px;
+  border-radius: 999px;
+  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .slot-detail-close:hover { color: var(--text); }
+}
+
+.slot-detail-close:active { transform: scale(0.9); }
 
 .slot-detail strong { color: var(--text); }
 
@@ -347,7 +433,11 @@ body {
   .status-badge { font-size: 2.3rem; }
 }
 
-/* ---------- Holiday overlay ---------- */
+/* ---------- Holiday overlay ----------
+   Materializes rather than just fading: blur ramps in alongside the card's
+   scale, so the surface reads as arriving glass, not a flat opacity toggle.
+   Kept in the DOM at all times (visibility via opacity/pointer-events) since
+   [hidden]/display:none can't be transitioned without extra plumbing here. */
 .holiday-overlay {
   position: fixed;
   inset: 0;
@@ -357,17 +447,36 @@ body {
   justify-content: center;
   padding: 24px;
   background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-out), backdrop-filter var(--dur-slow) var(--ease-out);
+}
+
+.holiday-overlay.is-visible {
+  opacity: 1;
+  pointer-events: auto;
   backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .holiday-card {
   max-width: 380px;
   text-align: center;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--card-bg-glass);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 32px 28px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.96);
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+
+.holiday-overlay.is-visible .holiday-card {
+  transform: scale(1);
 }
 
 .holiday-icon {
@@ -378,6 +487,8 @@ body {
 .holiday-card h2 {
   margin: 0 0 10px;
   font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .holiday-card p {
@@ -385,4 +496,39 @@ body {
   color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.5;
+}
+
+/* ---------- Accessibility ----------
+   Reduced motion keeps state changes legible (opacity/color) but drops
+   every transform-driven move: the sliding indicator, press scales, the
+   slot-detail grow-in, and the holiday card's materialize scale. */
+@media (prefers-reduced-motion: reduce) {
+  .day-tab-indicator,
+  .day-tab,
+  .slot,
+  .slot-detail,
+  .slot-detail-close,
+  .holiday-card,
+  .status-card {
+    transition-duration: var(--dur-fast);
+  }
+
+  .day-tab-indicator { transition-property: opacity; }
+  .day-tab:active,
+  .slot:active,
+  .slot-detail-close:active {
+    transform: none;
+  }
+  .slot-detail[hidden],
+  .slot-detail {
+    transform: none;
+  }
+  .holiday-card,
+  .holiday-overlay.is-visible .holiday-card {
+    transform: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .slot:hover { transform: none; }
+  }
 }

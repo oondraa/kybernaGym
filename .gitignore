@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+.agents/
+.claude/
+skills-lock.json

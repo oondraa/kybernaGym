@@ -10,6 +10,7 @@
     statusDetail: document.getElementById("status-detail"),
     statusSub: document.getElementById("status-sub"),
     dayTabs: document.getElementById("day-tabs"),
+    dayTabIndicator: document.getElementById("day-tab-indicator"),
     timeline: document.getElementById("timeline"),
     timelineDayTitle: document.getElementById("timeline-day-title"),
     slotDetail: document.getElementById("slot-detail"),
@@ -23,6 +24,14 @@
 
   let schedule = null;
   let selectedDay = null;
+  let indicatorReady = false;
+
+  // Forces a style flush between two class/attribute changes so a CSS
+  // transition reliably plays even when both writes happen in the same tick
+  // (e.g. the holiday overlay's very first appearance on page load).
+  function nextFrame(fn) {
+    requestAnimationFrame(() => requestAnimationFrame(fn));
+  }
 
   function pragueParts(date = new Date()) {
     const fmt = new Intl.DateTimeFormat("en-US", {
@@ -147,28 +156,55 @@
     }
   }
 
+  function positionDayTabIndicator() {
+    const activeBtn = els.dayTabs.querySelector(".day-tab.active");
+    if (!activeBtn) return;
+
+    // Width is set without a transition (day labels are near-identical width
+    // anyway) - only the transform slides, keeping the move GPU-only.
+    els.dayTabIndicator.style.width = `${activeBtn.offsetWidth}px`;
+
+    if (!indicatorReady) {
+      els.dayTabIndicator.style.transition = "none";
+      els.dayTabIndicator.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
+      void els.dayTabIndicator.offsetHeight; // force reflow before re-enabling the transition
+      els.dayTabIndicator.style.transition = "";
+      indicatorReady = true;
+    } else {
+      els.dayTabIndicator.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
+    }
+  }
+
   function renderDayTabs() {
     const { weekday } = pragueParts();
     const todayCode = WEEKDAY_TO_CODE[weekday];
 
-    els.dayTabs.innerHTML = "";
+    els.dayTabs.querySelectorAll(".day-tab").forEach((btn) => btn.remove());
     schedule.day_order.forEach((code) => {
       const day = schedule.days[code];
       if (!day) return;
       const btn = document.createElement("button");
+      btn.type = "button";
       btn.className = "day-tab";
       btn.textContent = day.name.slice(0, 2);
       btn.title = `${day.name} ${day.date_label}`;
       if (code === selectedDay) btn.classList.add("active");
       if (code === todayCode) btn.classList.add("is-today");
       btn.addEventListener("click", () => {
+        if (code === selectedDay) return;
         selectedDay = code;
         renderDayTabs();
-        renderTimeline();
+        els.timeline.classList.add("is-switching");
+        nextFrame(() => {
+          renderTimeline();
+          els.timeline.classList.remove("is-switching");
+        });
         hideSlotDetail();
       });
       els.dayTabs.appendChild(btn);
     });
+
+    positionDayTabIndicator();
   }
 
   function renderTimeline() {
@@ -222,6 +258,20 @@
     els.slotDetail.hidden = true;
   }
 
+  function updateHolidayOverlay() {
+    const shouldShow = isSummerHoliday();
+    const isShown = els.holidayOverlay.classList.contains("is-visible");
+    if (shouldShow === isShown) return;
+    if (shouldShow) {
+      // Two rAFs guarantee the browser paints the opacity:0 baseline before
+      // .is-visible is added, so the materialize transition plays even on
+      // the very first render instead of snapping straight to visible.
+      nextFrame(() => els.holidayOverlay.classList.add("is-visible"));
+    } else {
+      els.holidayOverlay.classList.remove("is-visible");
+    }
+  }
+
   function renderFooter() {
     els.sourceNote.textContent = schedule.source_note;
     const gen = new Date(schedule.generated_at);
@@ -231,7 +281,8 @@
 
   async function init() {
     els.slotDetailClose.addEventListener("click", hideSlotDetail);
-    els.holidayOverlay.hidden = !isSummerHoliday();
+    window.addEventListener("resize", positionDayTabIndicator);
+    updateHolidayOverlay();
 
     try {
       const res = await fetch("data/schedule.json", { cache: "no-store" });
@@ -258,7 +309,7 @@
       updateClock();
       renderStatus();
       renderTimeline();
-      els.holidayOverlay.hidden = !isSummerHoliday();
+      updateHolidayOverlay();
     }, 30000);
   }
 
