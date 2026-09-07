@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T20:12:44.797737+02:00",
+  "generated_at": "2026-09-07T07:56:27.744599+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -26,7 +26,7 @@
   "days": {
     "PO": {
       "name": "Pondělí",
-      "date_label": "31.8.2026",
+      "date_label": "7.9.2026",
       "slots": [
         {
           "period": 0,
@@ -104,7 +104,7 @@
     },
     "UT": {
       "name": "Úterý",
-      "date_label": "1.9.2026",
+      "date_label": "8.9.2026",
       "slots": [
         {
           "period": 0,
@@ -115,14 +115,26 @@
         {
           "period": 1,
           "time": "07:50-08:35",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G3",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 2,
           "time": "08:45-09:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G3",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 3,
@@ -139,14 +151,26 @@
         {
           "period": 5,
           "time": "11:45-12:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G1",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 6,
           "time": "12:45-13:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G1",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 7,
@@ -182,7 +206,7 @@
     },
     "ST": {
       "name": "Středa",
-      "date_label": "2.9.2026",
+      "date_label": "9.9.2026",
       "slots": [
         {
           "period": 0,
@@ -260,7 +284,7 @@
     },
     "CT": {
       "name": "Čtvrtek",
-      "date_label": "3.9.2026",
+      "date_label": "10.9.2026",
       "slots": [
         {
           "period": 0,
@@ -338,7 +362,7 @@
     },
     "PA": {
       "name": "Pátek",
-      "date_label": "4.9.2026",
+      "date_label": "11.9.2026",
       "slots": [
         {
           "period": 0,
