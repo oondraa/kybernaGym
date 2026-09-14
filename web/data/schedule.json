@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T20:43:30.763062+02:00",
+  "generated_at": "2026-09-14T08:01:43.635820+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -26,7 +26,7 @@
   "days": {
     "PO": {
       "name": "Pondělí",
-      "date_label": "7.9.2026",
+      "date_label": "14.9.2026",
       "slots": [
         {
           "period": 0,
@@ -104,7 +104,7 @@
     },
     "UT": {
       "name": "Úterý",
-      "date_label": "8.9.2026",
+      "date_label": "15.9.2026",
       "slots": [
         {
           "period": 0,
@@ -182,7 +182,7 @@
     },
     "ST": {
       "name": "Středa",
-      "date_label": "9.9.2026",
+      "date_label": "16.9.2026",
       "slots": [
         {
           "period": 0,
@@ -260,7 +260,7 @@
     },
     "CT": {
       "name": "Čtvrtek",
-      "date_label": "10.9.2026",
+      "date_label": "17.9.2026",
       "slots": [
         {
           "period": 0,
@@ -338,7 +338,7 @@
     },
     "PA": {
       "name": "Pátek",
-      "date_label": "11.9.2026",
+      "date_label": "18.9.2026",
       "slots": [
         {
           "period": 0,
