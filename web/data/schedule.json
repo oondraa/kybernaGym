@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T21:10:40.312913+02:00",
+  "generated_at": "2026-09-27T08:29:43.161291+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -49,26 +49,14 @@
         {
           "period": 3,
           "time": "09:45-10:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "I1",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 4,
           "time": "10:45-11:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "I1",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 5,
@@ -241,26 +229,14 @@
         {
           "period": 7,
           "time": "13:45-14:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "T4",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 8,
           "time": "14:45-15:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "T4",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 9,
@@ -295,26 +271,14 @@
         {
           "period": 1,
           "time": "07:50-08:35",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "T3",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 2,
           "time": "08:45-09:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "T3",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 3,
@@ -349,26 +313,14 @@
         {
           "period": 8,
           "time": "14:45-15:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G4",
-              "subject": "TEVt",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 9,
           "time": "15:45-16:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G4",
-              "subject": "TEVt",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 10,
