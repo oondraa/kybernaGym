@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T18:15:03.648282+02:00",
+  "generated_at": "2026-10-12T09:12:50.139399+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -26,7 +26,7 @@
   "days": {
     "PO": {
       "name": "Pondělí",
-      "date_label": "5.10.2026",
+      "date_label": "12.10.2026",
       "slots": [
         {
           "period": 0,
@@ -52,17 +52,23 @@
           "occupied": true,
           "entries": [
             {
-              "group": "I1",
-              "subject": "TEVt",
-              "teacher": "RO"
+              "group": "T1",
+              "subject": "TEV",
+              "teacher": "MH"
             }
           ]
         },
         {
           "period": 4,
           "time": "10:45-11:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T1",
+              "subject": "TEVt",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 5,
@@ -73,8 +79,14 @@
         {
           "period": 6,
           "time": "12:45-13:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I3",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
         },
         {
           "period": 7,
@@ -110,7 +122,7 @@
     },
     "UT": {
       "name": "Úterý",
-      "date_label": "6.10.2026",
+      "date_label": "13.10.2026",
       "slots": [
         {
           "period": 0,
@@ -188,7 +200,7 @@
     },
     "ST": {
       "name": "Středa",
-      "date_label": "7.10.2026",
+      "date_label": "14.10.2026",
       "slots": [
         {
           "period": 0,
@@ -205,14 +217,26 @@
         {
           "period": 2,
           "time": "08:45-09:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G3",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
         },
         {
           "period": 3,
           "time": "09:45-10:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G3",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
         },
         {
           "period": 4,
@@ -241,26 +265,32 @@
         {
           "period": 8,
           "time": "14:45-15:30",
-          "occupied": false,
-          "entries": []
-        },
-        {
-          "period": 9,
-          "time": "15:45-16:30",
-          "occupied": false,
-          "entries": []
-        },
-        {
-          "period": 10,
-          "time": "16:45-17:30",
           "occupied": true,
           "entries": [
             {
-              "group": "T4",
+              "group": "G2",
               "subject": "TEVt",
               "teacher": "RO"
             }
           ]
+        },
+        {
+          "period": 9,
+          "time": "15:45-16:30",
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G2",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
+        },
+        {
+          "period": 10,
+          "time": "16:45-17:30",
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 11,
@@ -272,7 +302,7 @@
     },
     "CT": {
       "name": "Čtvrtek",
-      "date_label": "8.10.2026",
+      "date_label": "15.10.2026",
       "slots": [
         {
           "period": 0,
@@ -286,9 +316,9 @@
           "occupied": true,
           "entries": [
             {
-              "group": "T3",
-              "subject": "TEVt",
-              "teacher": "RO"
+              "group": "T2",
+              "subject": "TEVE",
+              "teacher": "MH"
             }
           ]
         },
@@ -298,23 +328,35 @@
           "occupied": true,
           "entries": [
             {
-              "group": "T3",
+              "group": "T2",
               "subject": "TEVt",
-              "teacher": "RO"
+              "teacher": "MH"
             }
           ]
         },
         {
           "period": 3,
           "time": "09:45-10:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I2",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 4,
           "time": "10:45-11:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "I2",
+              "subject": "TEVt",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 5,
@@ -337,14 +379,8 @@
         {
           "period": 8,
           "time": "14:45-15:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G4",
-              "subject": "TEVt",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 9,
@@ -352,8 +388,8 @@
           "occupied": true,
           "entries": [
             {
-              "group": "G4",
-              "subject": "TEVt",
+              "group": "G1",
+              "subject": "TEVE",
               "teacher": "MH"
             }
           ]
@@ -374,7 +410,7 @@
     },
     "PA": {
       "name": "Pátek",
-      "date_label": "9.10.2026",
+      "date_label": "16.10.2026",
       "slots": [
         {
           "period": 0,
