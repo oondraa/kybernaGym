@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T16:59:52.835631+02:00",
+  "generated_at": "2026-10-14T22:08:08.673929+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -367,14 +367,26 @@
         {
           "period": 6,
           "time": "12:45-13:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G1",
+              "subject": "TEV",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 7,
           "time": "13:45-14:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G1",
+              "subject": "TEVt",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 8,
@@ -385,14 +397,8 @@
         {
           "period": 9,
           "time": "15:45-16:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G1",
-              "subject": "TEVE",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 10,
