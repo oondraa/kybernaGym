@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T20:21:50.216394+02:00",
+  "generated_at": "2026-10-18T07:41:47.147582+02:00",
   "source_note": "Data vytěžena OCR z aktuálního rozvrhu SIS, automaticky aktualizováno několikrát denně.",
   "times": [
     "07:00-07:45",
@@ -52,23 +52,17 @@
           "occupied": true,
           "entries": [
             {
-              "group": "T1",
-              "subject": "TEV",
-              "teacher": "MH"
+              "group": "I1",
+              "subject": "TEVt",
+              "teacher": "RO"
             }
           ]
         },
         {
           "period": 4,
           "time": "10:45-11:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "T1",
-              "subject": "TEVt",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 5,
@@ -79,14 +73,8 @@
         {
           "period": 6,
           "time": "12:45-13:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "I3",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 7,
@@ -217,26 +205,14 @@
         {
           "period": 2,
           "time": "08:45-09:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G3",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 3,
           "time": "09:45-10:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G3",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 4,
@@ -265,32 +241,26 @@
         {
           "period": 8,
           "time": "14:45-15:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G2",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 9,
           "time": "15:45-16:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G2",
-              "subject": "TEVt",
-              "teacher": "RO"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 10,
           "time": "16:45-17:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "T4",
+              "subject": "TEVt",
+              "teacher": "RO"
+            }
+          ]
         },
         {
           "period": 11,
@@ -316,9 +286,9 @@
           "occupied": true,
           "entries": [
             {
-              "group": "T2",
-              "subject": "TEVE",
-              "teacher": "MH"
+              "group": "T3",
+              "subject": "TEVt",
+              "teacher": "RO"
             }
           ]
         },
@@ -328,35 +298,23 @@
           "occupied": true,
           "entries": [
             {
-              "group": "T2",
+              "group": "T3",
               "subject": "TEVt",
-              "teacher": "MH"
+              "teacher": "RO"
             }
           ]
         },
         {
           "period": 3,
           "time": "09:45-10:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "I2",
-              "subject": "TEV",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 4,
           "time": "10:45-11:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "I2",
-              "subject": "TEVt",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 5,
@@ -367,38 +325,38 @@
         {
           "period": 6,
           "time": "12:45-13:30",
-          "occupied": true,
-          "entries": [
-            {
-              "group": "G1",
-              "subject": "TEV",
-              "teacher": "MH"
-            }
-          ]
+          "occupied": false,
+          "entries": []
         },
         {
           "period": 7,
           "time": "13:45-14:30",
+          "occupied": false,
+          "entries": []
+        },
+        {
+          "period": 8,
+          "time": "14:45-15:30",
           "occupied": true,
           "entries": [
             {
-              "group": "G1",
+              "group": "G4",
               "subject": "TEVt",
               "teacher": "MH"
             }
           ]
         },
         {
-          "period": 8,
-          "time": "14:45-15:30",
-          "occupied": false,
-          "entries": []
-        },
-        {
           "period": 9,
           "time": "15:45-16:30",
-          "occupied": false,
-          "entries": []
+          "occupied": true,
+          "entries": [
+            {
+              "group": "G4",
+              "subject": "TEVt",
+              "teacher": "MH"
+            }
+          ]
         },
         {
           "period": 10,
